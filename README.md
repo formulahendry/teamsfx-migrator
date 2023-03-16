@@ -6,7 +6,7 @@ CLI to migrate samples to TeamsFX V3
 
 1. Install the CLI
     ```
-    npm install tfx-migration-helper
+    npm install tfx-migration-helper -g
     ```
 
 1. `cd` to the root folder of the project to be migrated

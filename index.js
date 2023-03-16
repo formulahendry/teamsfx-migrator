@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { program } = require('commander');
 const { migrate } = require('./migrate');
 const packageJson = require('./package.json');
