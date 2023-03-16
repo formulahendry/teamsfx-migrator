@@ -2,12 +2,21 @@ const os = require('os');
 const { promises: fs } = require('fs');
 const path = require('path');
 const replace = require('replace-in-file');
+const migrateTab = require('./apps/tab');
 
 async function migrate(appName, appType) {
     const tmpFolder = await copyTemplateToTmpFolder(appType);
     await replacePlaceholderInTmpFolder(appName, tmpFolder);
     await copyTmpFolderToCurrentFolder(tmpFolder);
     await deleteTmpFolder(tmpFolder);
+
+    switch (appType) {
+        case "tab":
+            await migrateTab();
+            break;
+        default:
+            break;
+    }
 }
 
 async function copyTemplateToTmpFolder(appType) {
@@ -28,7 +37,6 @@ async function replacePlaceholderInTmpFolder(appName, tmpFolder) {
         },
     })
 }
-
 
 async function copyTmpFolderToCurrentFolder(tmpFolder) {
     await fs.cp(tmpFolder, process.cwd(), { recursive: true });
