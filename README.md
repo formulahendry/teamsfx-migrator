@@ -1,6 +1,6 @@
 ## tfx-migration-helper
 
-CLI to migrate samples to TeamsFX V3
+CLI to reduce manual steps to migrate samples to TeamsFX V3.
 
 ### Usage
 

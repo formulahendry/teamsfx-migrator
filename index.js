@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const { program } = require('commander');
+const { program, Option } = require('commander');
+const { AppTypes } = require('./constant');
 const { migrate } = require('./migrate');
 const packageJson = require('./package.json');
 
@@ -10,8 +11,10 @@ program
 
 program.command('migrate')
   .description('Migrate project in current folder to TeamsFX V3')
-  .option('-n, --name <type>', 'app name')
-  .option('-t, --type <type>', 'app type')
+  .requiredOption('-n, --name <type>', 'app name')
+  .addOption(new Option('-t, --type <type>', 'app type')
+    .makeOptionMandatory()
+    .choices(Object.values(AppTypes)))
   .action(async (options) => {
     console.log(options);
     await migrate(options.name, options.type)
