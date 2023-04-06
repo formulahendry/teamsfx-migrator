@@ -2,9 +2,10 @@ const os = require('os');
 const { promises: fs } = require('fs');
 const path = require('path');
 const replace = require('replace-in-file');
+const { AppTypes } = require('./constant');
 const migrateTab = require('./apps/tab');
 const migrateTabSso = require('./apps/tab-sso');
-const { AppTypes } = require('./constant');
+const migrateBot = require('./apps/bot');
 
 async function migrate(appName, appType) {
     const tmpFolder = await copyTemplateToTmpFolder(appType);
@@ -18,6 +19,9 @@ async function migrate(appName, appType) {
             break;
         case AppTypes.TabSso:
             await migrateTabSso();
+            break;
+        case AppTypes.Bot:
+            await migrateBot();
             break;
         default:
             break;
