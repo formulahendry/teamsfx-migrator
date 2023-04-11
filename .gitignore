@@ -131,3 +131,17 @@ dist
 
 # misc
 tmp
+
+######
+
+# TeamsFx files
+env/.env.*
+.localSettings
+
+# dependencies
+node_modules/
+
+# misc
+.env
+.deployment
+.DS_Store
