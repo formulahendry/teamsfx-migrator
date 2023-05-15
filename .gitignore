@@ -135,7 +135,6 @@ tmp
 ######
 
 # TeamsFx files
-env/.env.*
 .localSettings
 
 # dependencies
