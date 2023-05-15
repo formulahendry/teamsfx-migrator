@@ -6,6 +6,7 @@ const { AppTypes } = require('./constant');
 const migrateTab = require('./apps/tab');
 const migrateTabSso = require('./apps/tab-sso');
 const migrateBot = require('./apps/bot');
+const migrateBotSso = require('./apps/bot-sso');
 
 async function migrate(appName, appType) {
     const tmpFolder = await copyTemplateToTmpFolder(appType);
@@ -22,6 +23,9 @@ async function migrate(appName, appType) {
             break;
         case AppTypes.Bot:
             await migrateBot();
+            break;
+        case AppTypes.BotSso:
+            await migrateBotSso();
             break;
         default:
             break;
