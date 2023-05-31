@@ -21,6 +21,23 @@ CLI to reduce manual steps to migrate samples to TeamsFX V3.
     ```
 ## Migration steps
 
+### Tab
+
+Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3/samples/tab-ui-templates/ts as example, the steps are:
+
+* Run `tfxm migrate -t tab -n tab-ui-templates`
+* Update .gitignore: copy or append content from .gitignore.example
+* Update placeholder in manifest.json
+* Update teamsapp.local.yml
+    * Change value of manifestPath to `./src/manifest/manifest.json`
+* Update package.json
+    * Install dev dependency: `npm install --save-dev env-cmd`
+    * Add 'dev:teamsfx' in 'scripts' section, and update "start" section:
+        ```
+        "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
+        "start": "react-scripts start",
+        ```
+
 ### Tab SSO
 
 Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3/samples/tab-sso/nodejs as example, the steps are:
