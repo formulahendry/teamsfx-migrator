@@ -6,13 +6,19 @@
       "value": "bot${{RESOURCE_SUFFIX}}"
     },
     "botAadAppClientId": {
-      "value": "${{BOT_ID}}"
+      "value": "${{AAD_APP_CLIENT_ID}}"
     },
     "botAppDomain": {
       "value": "${{BOT_DOMAIN}}"
     },
     "botDisplayName": {
       "value": "{%appName%}"
+    },
+    "microsoftAppType": {
+      "value": "${{MICROSOFT_APP_TYPE}}"
+    },
+    "microsoftAppTenantId": {
+      "value": "${{MICROSOFT_APP_TENANT_ID}}"
     }
   }
 }

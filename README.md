@@ -61,6 +61,23 @@ Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3/samp
     },
     ```
 
+### Bot
+
+Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3/samples/bot-conversation/nodejs as example, the steps are:
+
+* Run `tfxm migrate -t bot-sso -n bot-conversation`
+* Update .gitignore: copy or append content from .gitignore.example
+* Update placeholder in manifest.json
+* Update color.png and outline.png to make them pass validation rules
+* Update package.json, add 'dev:teamsfx' and 'dev' in 'scripts' section:
+    ```
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+    ```
+* For single-tenant support:
+    * Change environment variables: https://github.com/formulahendry/Microsoft-Teams-Samples/blob/70e6840a53be1cd76adb8478fc118ce6d055c089/samples/bot-conversation/nodejs/teamsapp.local.yml#L33C1-L34
+    * Change signInAudience to AzureADMyOrg: https://github.com/formulahendry/Microsoft-Teams-Samples/blob/70e6840a53be1cd76adb8478fc118ce6d055c089/samples/bot-conversation/nodejs/teamsapp.local.yml#L11
+
 ### Bot SSO
 
 Use https://github.com/formulahendry/Microsoft-Teams-Samples/blob/junhan/v3/samples/bot-conversation-sso-quickstart/js/ as example, the steps are:
