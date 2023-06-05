@@ -65,7 +65,7 @@ Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3/samp
 
 Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3/samples/bot-conversation/nodejs as example, the steps are:
 
-* Run `tfxm migrate -t bot-sso -n bot-conversation`
+* Run `tfxm migrate -t bot -n bot-conversation`
 * Update .gitignore: copy or append content from .gitignore.example
 * Update placeholder in manifest.json
 * Update color.png and outline.png to make them pass validation rules
