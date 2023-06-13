@@ -116,3 +116,27 @@ Use https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgex
           BotId: ${{AAD_APP_CLIENT_ID}}
           BotPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
     ```
+
+### Message extensions SSO
+
+Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3/samples/msgext-search-sso-config/nodejs as example, the steps are:
+
+* Run `tfxm migrate -t bot-sso -n msgext-search-sso-config`
+* Update .gitignore: copy or append content from .gitignore.example
+* Update placeholder in manifest.json
+* Update package.json, add 'dev:teamsfx' and 'dev' in 'scripts' section:
+    ```
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+    ```
+* Update teamsapp.local.yml, change file/createOrUpdateEnvironmentFile action:
+    ```yml
+    - uses: file/createOrUpdateEnvironmentFile
+      with:
+        target: ./.env
+        envs:
+          MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
+          MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+          connectionName: ${{CONNECTION_NAME}}
+          SiteUrl: ${{BOT_ENDPOINT}}
+    ```
