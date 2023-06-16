@@ -140,3 +140,35 @@ Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3/samp
           connectionName: ${{CONNECTION_NAME}}
           SiteUrl: ${{BOT_ENDPOINT}}
     ```
+### Tab + Bot
+
+Use https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs as example, the steps are:
+
+* Run `tfxm migrate -t bot -n app-hello-world`
+* Update .gitignore: copy or append content from .gitignore.example
+* Update placeholder in manifest.json
+* Update package.json, add 'dev:teamsfx' and 'dev' in 'scripts' section:
+    ```
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --exec babel-node --inspect=9239 --signal SIGINT src/app.js",
+    ```
+* Update teamsapp.local.yml, change file/createOrUpdateEnvironmentFile action:
+    ```yml
+    # Generate runtime environment variables
+    - uses: file/createOrUpdateEnvironmentFile
+      with:
+        target: ./.env
+        envs:
+          PORT: 3978
+    - uses: file/createOrUpdateJsonFile
+      with:
+        target: ./config/default.json # Required. The relative path of settings file
+        appsettings: # Required. The appsettings to be generated
+          bot:
+            appId: ${{AAD_APP_CLIENT_ID}}
+            appPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+    ```
+* Fix code in src\app.js:
+    ```javascript
+    const ENV_FILE = path.join(__dirname, '..', '.env');
+    ```
