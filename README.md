@@ -172,3 +172,35 @@ Use https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-h
     ```javascript
     const ENV_FILE = path.join(__dirname, '..', '.env');
     ```
+
+---
+
+### Tab (yo teams)
+
+Use https://github.com/formulahendry/yo-teams-migration/tree/main/tab as example, the steps are:
+
+* Run `tfxm migrate -t tab -n tab`
+* Update .gitignore: copy or append content from .gitignore.example
+* Update placeholder in manifest.json
+* Update package.json, add 'dev:teamsfx' in 'scripts' section:
+        "dev:teamsfx": "gulp serve",
+* Update tasks.json
+    * Add "Start local tunnel" task
+    * Change "Start frontend": `"endsPattern": "Server running on"`
+* Update teamsapp.local.yml
+    * Remove "Set TAB_DOMAIN and TAB_ENDPOINT for local launch"
+    * Update manifestPath
+    * Replace whole 'deploy' lifecycle:
+        ```yml
+        # Run npm command
+        - uses: cli/runNpmCommand
+          with:
+            args: install --no-audit
+    
+        # Generate runtime environment variables
+        - uses: file/createOrUpdateEnvironmentFile
+          with:
+            target: ./.env
+            envs:
+              PORT: 53000
+        ```
