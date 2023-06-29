@@ -183,7 +183,9 @@ Use https://github.com/formulahendry/yo-teams-migration/tree/main/tab as example
 * Update .gitignore: copy or append content from .gitignore.example
 * Update placeholder in manifest.json
 * Update package.json, add 'dev:teamsfx' in 'scripts' section:
-        "dev:teamsfx": "gulp serve",
+    ```
+    "dev:teamsfx": "gulp serve --debug --no-schema-validation",
+    ```
 * Update tasks.json
     * Add "Start local tunnel" task
     * Change "Start frontend": `"endsPattern": "Server running on"`
@@ -203,4 +205,31 @@ Use https://github.com/formulahendry/yo-teams-migration/tree/main/tab as example
             target: ./.env
             envs:
               PORT: 53000
+        ```
+
+### Tab SSO (yo teams)
+
+Use https://github.com/formulahendry/yo-teams-migration/tree/main/tab-sso as example, the steps are:
+
+* Run `tfxm migrate -t tab-sso -n tab-sso`
+* Update .gitignore: copy or append content from .gitignore.example
+* Update placeholder in manifest.json
+* Update package.json, add 'dev:teamsfx' in 'scripts' section:
+    ```
+    "dev:teamsfx": "gulp serve --debug --no-schema-validation",
+    ```
+* Update tasks.json
+    * Change "Start frontend": `"endsPattern": "Server running on"`
+* Update teamsapp.local.yml
+    * Update manifestPath
+    * Replace 'file/createOrUpdateJsonFile' action:
+        ```yml
+        # Generate runtime environment variables
+        - uses: file/createOrUpdateEnvironmentFile
+          with:
+            target: ./.env
+            envs:
+              PORT: 53000
+              TAB_APP_ID: ${{AAD_APP_CLIENT_ID}}
+              TAB_APP_URI: api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}
         ```
