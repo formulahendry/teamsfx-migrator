@@ -233,3 +233,30 @@ Use https://github.com/formulahendry/yo-teams-migration/tree/main/tab-sso as exa
               TAB_APP_ID: ${{AAD_APP_CLIENT_ID}}
               TAB_APP_URI: api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}
         ```
+
+### Bot (yo teams)
+
+Use https://github.com/formulahendry/yo-teams-migration/tree/main/bot as example, the steps are:
+
+* Run `tfxm migrate -t bot -n bot`
+* Update .gitignore: copy or append content from .gitignore.example
+* Update placeholder in manifest.json
+* Update package.json, add 'dev:teamsfx' in 'scripts' section:
+    ```
+    "dev:teamsfx": "gulp serve --debug --no-schema-validation",
+    ```
+* Update tasks.json
+    * Change "Start frontend": `"endsPattern": "Server running on"`
+* Update teamsapp.local.yml
+    * Update manifestPath
+    * Replace 'file/createOrUpdateJsonFile' action:
+        ```yml
+        # Generate runtime environment variables
+        - uses: file/createOrUpdateEnvironmentFile
+          with:
+            target: ./.env
+            envs:
+              PORT: 3978
+              MICROSOFT_APP_ID: ${{AAD_APP_CLIENT_ID}}
+              MICROSOFT_APP_PASSWORD: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        ```
