@@ -260,3 +260,7 @@ Use https://github.com/formulahendry/yo-teams-migration/tree/main/bot as example
               MICROSOFT_APP_ID: ${{AAD_APP_CLIENT_ID}}
               MICROSOFT_APP_PASSWORD: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         ```
+
+### Tab+Bot (yo teams)
+
+Use https://github.com/formulahendry/yo-teams-migration/tree/main/tab%252Bbot as example, the steps are same as [Bot (yo teams)](#bot-yo-teams).
