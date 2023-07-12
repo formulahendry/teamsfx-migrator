@@ -263,4 +263,4 @@ Use https://github.com/formulahendry/yo-teams-migration/tree/main/bot as example
 
 ### Tab+Bot (yo teams)
 
-Use https://github.com/formulahendry/yo-teams-migration/tree/main/tab%252Bbot as example, the steps are same as [Bot (yo teams)](#bot-yo-teams).
+Use https://github.com/formulahendry/yo-teams-migration/tree/main/tab+bot as example, the steps are same as [Bot (yo teams)](#bot-yo-teams).
