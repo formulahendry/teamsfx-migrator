@@ -27,9 +27,15 @@ async function migrate(appName, appType) {
         case AppTypes.BotSso:
             await migrateBotSso();
             break;
+        case AppTypes.TabBot:
+            await updateManifestJson();
+            await updatePackageJson();
+            break;
         default:
             break;
     }
+
+    console.log("Migration is finished.");
 }
 
 async function copyTemplateToTmpFolder(appType) {
@@ -57,6 +63,47 @@ async function copyTmpFolderToCurrentFolder(tmpFolder) {
 
 async function deleteTmpFolder(tmpFolder) {
     await fs.rm(tmpFolder, { recursive: true });
+}
+
+async function updateManifestJson() {
+    const replacementMap = [
+        {
+            from: /{{APPLICATION_ID}}/g,
+            to: "${{TEAMS_APP_ID}}",
+        },
+        {
+            from: /{{VERSION}}/g,
+            to: "1.0.0",
+        },
+        {
+            from: /{{PACKAGE_NAME}}/g,
+            to: "com.contoso.teams",
+        },
+        {
+            from: /{{PUBLIC_HOSTNAME}}/g,
+            to: "${{BOT_DOMAIN}}",
+        },
+        {
+            from: /{{MICROSOFT_APP_ID}}/g,
+            to: "${{AAD_APP_CLIENT_ID}}",
+        },
+    ]
+    
+    for (const replacement of replacementMap) {
+        await replace({
+            files: path.join(process.cwd(), 'src', 'manifest', 'manifest.json'),
+            from: replacement.from,
+            to: replacement.to,
+        })
+    }
+}
+
+async function updatePackageJson() {
+    const packageJsonFilePath = path.join(process.cwd(), 'package.json');
+    const packageJson = require(packageJsonFilePath);
+    packageJson["scripts"]["dev:teamsfx"] = "gulp serve --debug --no-schema-validation";
+    packageJson["dependencies"]["ajv"] = "^8.12.0";
+    fs.writeFile(packageJsonFilePath, JSON.stringify(packageJson, null, 2));
 }
 
 module.exports = { migrate }
