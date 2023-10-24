@@ -31,6 +31,8 @@ async function migrate(appName, appType) {
             await updateManifestJson();
             await updatePackageJson();
             break;
+        case AppTypes.TabCsharp:
+            await updateCsprojFile();
         default:
             break;
     }
@@ -88,7 +90,7 @@ async function updateManifestJson() {
             to: "${{AAD_APP_CLIENT_ID}}",
         },
     ]
-    
+
     for (const replacement of replacementMap) {
         await replace({
             files: path.join(process.cwd(), 'src', 'manifest', 'manifest.json'),
@@ -104,6 +106,33 @@ async function updatePackageJson() {
     packageJson["scripts"]["dev:teamsfx"] = "gulp serve --debug --no-schema-validation";
     packageJson["dependencies"]["ajv"] = "^8.12.0";
     fs.writeFile(packageJsonFilePath, JSON.stringify(packageJson, null, 2));
+}
+
+async function updateCsprojFile() {
+    const csprojFiles = (await fs.readdir(process.cwd())).filter(fn => fn.endsWith('.csproj'));
+
+    if (csprojFiles.length === 0) {
+        console.log('No .csproj files found in current directory');
+        return;
+    }
+
+    const csprojFilePath = csprojFiles[0];
+    console.log({ csprojFilePath });
+    const content = await fs.readFile(csprojFilePath, 'utf8');
+
+    const searchString = '</ItemGroup>';
+    // Find the last <ItemGroup> tag in the file
+    const lastItemGroupIndex = content.lastIndexOf(searchString);
+
+    // Insert the new <ItemGroup> section after the last one
+    const newItemGroup = `
+
+  <ItemGroup>
+    <ProjectCapability Include="TeamsFx" />
+  </ItemGroup>`;
+    const newContent = content.slice(0, lastItemGroupIndex + searchString.length) + newItemGroup + content.slice(lastItemGroupIndex + searchString.length);
+
+    await fs.writeFile(csprojFilePath, newContent);
 }
 
 module.exports = { migrate }
