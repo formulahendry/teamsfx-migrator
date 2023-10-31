@@ -264,3 +264,15 @@ Use https://github.com/formulahendry/yo-teams-migration/tree/main/bot as example
 ### Tab+Bot (yo teams)
 
 Use https://github.com/formulahendry/yo-teams-migration/tree/main/tab+bot as example, the steps are same as [Bot (yo teams)](#bot-yo-teams).
+
+---
+
+### Tab (C#)
+
+Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3-dotnet/samples/tab-personal/mvc-csharp as example, the steps are:
+
+* Run `tfxm migrate -t tab-csharp -n tab-personal`
+* Update .gitignore: copy or append content from .gitignore.example
+* Update placeholder in manifest.json
+* Update teamsapp.local.yml
+    * Change value of manifestPath to `./AppManifest/manifest.json`
