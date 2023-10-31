@@ -271,7 +271,7 @@ Use https://github.com/formulahendry/yo-teams-migration/tree/main/tab+bot as exa
 
 Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3-dotnet/samples/tab-personal/mvc-csharp as example, the steps are:
 
-* Run `tfxm migrate -t tab-csharp -n tab-personal`
+* Run `tfxm migrate -t tab-csharp -n tab-personal` in the folder which contains the .csproj file
 * Update .gitignore: copy or append content from .gitignore.example
 * Update placeholder in manifest.json
 * Update teamsapp.local.yml
