@@ -32,6 +32,7 @@ async function migrate(appName, appType) {
             await updatePackageJson();
             break;
         case AppTypes.TabCsharp:
+        case AppTypes.TabSsoCsharp:
             await updateCsprojFile();
         default:
             break;

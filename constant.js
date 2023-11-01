@@ -5,6 +5,7 @@ const AppTypes = {
     BotSso: "bot-sso",
     TabBot: "tab-bot",
     TabCsharp: "tab-csharp",
+    TabSsoCsharp: "tab-sso-csharp",
 }
 
 module.exports = { AppTypes }
