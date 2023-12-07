@@ -276,3 +276,13 @@ Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3-dotn
 * Update placeholder in manifest.json
 * Update teamsapp.local.yml
     * Change value of manifestPath to `./AppManifest/manifest.json`
+
+### Tab SSO (C#)
+
+Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3-dotnet/samples/tab-personal-sso-quickstart/csharp_dotnetcore as example, the steps are:
+
+* Run `tfxm migrate -t tab-sso-csharp -n tab-personal-sso-quickstart` in the folder which contains the .csproj file
+* Update .gitignore: copy or append content from .gitignore.example
+* Update placeholder in manifest.json
+* Update teamsapp.local.yml
+    * Change value of manifestPath of teamsApp to `./Manifest/manifest.json`
