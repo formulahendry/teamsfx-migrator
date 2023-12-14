@@ -33,6 +33,7 @@ async function migrate(appName, appType) {
             break;
         case AppTypes.TabCsharp:
         case AppTypes.TabSsoCsharp:
+        case AppTypes.BotCsharp:
             await updateCsprojFile();
         default:
             break;
