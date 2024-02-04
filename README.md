@@ -297,6 +297,14 @@ Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3-dotn
 * Update teamsapp.local.yml
     * Change value of manifestPath of teamsApp to `./TeamsAppManifest/manifest.json`
 
+### Bot SSO (C#)
+
+Use https://github.com/formulahendry/Microsoft-Teams-Samples/tree/junhan/v3-dotnet/samples/bot-conversation-sso-quickstart/csharp_dotnetcore  as example, the steps are:
+
+* Run `tfxm migrate -t bot-sso-csharp -n bot-conversation-sso-quickstart`  in the folder which contains the .csproj file
+* Update .gitignore: copy or append content from .gitignore.example
+* Update placeholder in manifest.json
+
 ### Message extensions (C#)
 
 The steps are similar to [Bot (C#)](#bot-c). For some ME projects that have `BaseUrl` in appsettings.json, you just need to add `BaseUrl: ${{BOT_ENDPOINT}}` in teamsapp.local.yml like below:
@@ -312,4 +320,22 @@ The steps are similar to [Bot (C#)](#bot-c). For some ME projects that have `Bas
       MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
       MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
       BaseUrl: ${{BOT_ENDPOINT}}
+```
+
+### Message extensions SSO (C#)
+
+The steps are similar to [Bot SSO (C#)](#bot-sso-c). For some ME SSO projects that have `SiteUrl` in appsettings.json, you just need to add `SiteUrl: ${{BOT_ENDPOINT}}` in teamsapp.local.yml like below:
+
+```yml
+# Generate runtime appsettings to JSON file
+- uses: file/createOrUpdateJsonFile
+  with:
+    target: ./appsettings.json
+    content:
+      MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
+      MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+      ConnectionName: ${{CONNECTION_NAME}}
+      MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
+      MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
+      SiteUrl: ${{BOT_ENDPOINT}}
 ```
